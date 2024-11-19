@@ -1,6 +1,18 @@
+body, html {
+  overflow-x: hidden;
+}
+
 body {
   background: linear-gradient(180deg, #E0F7FA 0%, #FFF 100%);
   margin: 0;
   padding: 0;
   min-height: 100vh;
+}
+
+.recharts-surface {
+  width: 100vw !important; 
+}
+
+.css-1ot8lh8 {
+  padding: 5px !important;
 }
