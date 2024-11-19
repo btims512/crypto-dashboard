@@ -26,20 +26,20 @@ function App() {
     const fetchData = async () => {
       setLoading(true);
 
-      // Check sessionStorage for cached data, API call count, and last API call timestamp
-      const cachedCoins = sessionStorage.getItem("coinsData");
-      const cachedChart = sessionStorage.getItem("chartData");
-      let apiCallCount = parseInt(sessionStorage.getItem("apiCallCount")) || 0;
+      // Check localStorage for cached data, API call count, and last API call timestamp
+      const cachedCoins = localStorage.getItem("coinsData");
+      const cachedChart = localStorage.getItem("chartData");
+      let apiCallCount = parseInt(localStorage.getItem("apiCallCount")) || 0;
       let lastApiCallTime =
-        parseInt(sessionStorage.getItem("lastApiCallTime")) || 0;
+        parseInt(localStorage.getItem("lastApiCallTime")) || 0;
       const currentTime = Date.now();
 
       // Reset apiCallCount if more than a minute has passed since the last API call
       if (currentTime - lastApiCallTime >= ONE_MINUTE) {
         console.log("One minute passed, resetting API call count.");
         apiCallCount = 0;
-        sessionStorage.setItem("apiCallCount", apiCallCount);
-        sessionStorage.setItem("lastApiCallTime", currentTime); // Update timestamp
+        localStorage.setItem("apiCallCount", apiCallCount);
+        localStorage.setItem("lastApiCallTime", currentTime); // Update timestamp
       }
 
       // Use cache if it exists and we've reached the max API call limit
@@ -83,14 +83,14 @@ function App() {
           }));
         setChartData(formattedData);
 
-        // Cache data in sessionStorage
-        sessionStorage.setItem("coinsData", JSON.stringify(coinsResponse.data));
-        sessionStorage.setItem("chartData", JSON.stringify(formattedData));
+        // Cache data in localStorage
+        localStorage.setItem("coinsData", JSON.stringify(coinsResponse.data));
+        localStorage.setItem("chartData", JSON.stringify(formattedData));
 
         // Increment and store the API call count and update the last call time
         apiCallCount += 1;
-        sessionStorage.setItem("apiCallCount", apiCallCount);
-        sessionStorage.setItem("lastApiCallTime", currentTime); // Store current time
+        localStorage.setItem("apiCallCount", apiCallCount);
+        localStorage.setItem("lastApiCallTime", currentTime); // Store current time
         console.log(`API call count: ${apiCallCount}`);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -115,7 +115,7 @@ function App() {
           <PriceChangeGraph data={chartData} />
         </>
       )}
-      <Footer />
+      {/* <Footer /> */}
     </Container>
   );
 }

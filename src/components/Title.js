@@ -14,6 +14,9 @@ const Title = ({ onRefresh }) => {
         flexDirection: "row",
         py: 5,
         textAlign: "center",
+        "@media (max-width: 429px)": {
+          justifyContent: "center",
+        },
       }}
     >
       <Typography variant="h3" component="h1" sx={{ fontWeight: 300 }}>
