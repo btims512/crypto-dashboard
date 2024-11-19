@@ -3,6 +3,7 @@ import { Container, CircularProgress, Box } from "@mui/material";
 import Title from "./components/Title";
 import TopCoinsTable from "./components/TopCoinsTable";
 import PriceChangeGraph from "./components/PriceChangeGraph";
+import Footer from "./components/Footer"
 
 import "./App.css";
 
@@ -11,8 +12,8 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const handleRefresh = () => {
-    setLoading(true); // Start loading
-    setRefresh((prev) => !prev); // Toggle refresh to trigger re-fetch
+    setLoading(true);
+    setRefresh((prev) => !prev);
   };
 
   return (
@@ -28,6 +29,7 @@ function App() {
           <PriceChangeGraph refresh={refresh} setLoading={setLoading} />
         </>
       )}
+      <Footer />
     </Container>
   );
 }

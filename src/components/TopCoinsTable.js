@@ -17,7 +17,7 @@ function TopCoinsTable({ refresh, setLoading }) {
 
   useEffect(() => {
     const fetchCoins = async () => {
-      setLoading(true);  // Start loading spinner
+      setLoading(true);
       try {
         const response = await axios.get(
           "https://api.coingecko.com/api/v3/coins/markets",
@@ -34,7 +34,7 @@ function TopCoinsTable({ refresh, setLoading }) {
       } catch (error) {
         console.error("Error fetching coins:", error);
       } finally {
-        setLoading(false);  // Stop loading spinner
+        setLoading(false); 
       }
     };
 
