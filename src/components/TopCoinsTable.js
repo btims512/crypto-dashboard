@@ -12,35 +12,7 @@ import {
   Box,
 } from "@mui/material";
 
-function TopCoinsTable({ refresh, setLoading }) {
-  const [coins, setCoins] = useState([]);
-
-  useEffect(() => {
-    const fetchCoins = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(
-          "https://api.coingecko.com/api/v3/coins/markets",
-          {
-            params: {
-              vs_currency: "usd",
-              order: "market_cap_desc",
-              per_page: 10,
-              page: 1,
-            },
-          }
-        );
-        setCoins(response.data);
-      } catch (error) {
-        console.error("Error fetching coins:", error);
-      } finally {
-        setLoading(false); 
-      }
-    };
-
-    fetchCoins();
-  }, [refresh, setLoading]);
-
+function TopCoinsTable({ coins }) {
   return (
     <TableContainer component={Paper} sx={{ marginBottom: "40px" }}>
       <Table>

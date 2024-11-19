@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import {
   AreaChart,
   Area,
@@ -9,45 +8,9 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
-import { CircularProgress, Box } from "@mui/material";
+import { Box } from "@mui/material";
 
-function PriceChangeGraph({ refresh, setLoading }) {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(
-          "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart",
-          {
-            params: {
-              vs_currency: "usd",
-              days: 7,
-            },
-          }
-        );
-
-        const formattedData = response.data.prices.slice(-7).map((price, index) => ({
-          date: new Date(price[0]).toLocaleDateString("en-US", {
-            weekday: "short",
-            day: "numeric",
-          }),
-          price: price[1],
-        }));
-        
-
-        setData(formattedData);
-      } catch (error) {
-        console.error("Error fetching chart data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [refresh, setLoading]);
-
+function PriceChangeGraph({ data }) {
   return (
     <Box sx={{ backgroundColor: "white", padding: 2, borderRadius: 2 }}>
       <ResponsiveContainer width="100%" height={300}>
